@@ -17,7 +17,7 @@ function cleanup()
   exit $rc
 }
 
-trap cleanup EXIT
+# trap cleanup EXIT
 
 echo "Preparing depot tools"
 cd "/home/${USERNAME}/chromiumos"
@@ -26,8 +26,8 @@ export PATH="/home/${USERNAME}/chromiumos/depot_tools:${PATH}"
 cd ${DATA_DIR}
 
 echo "Preparing environment, branch ${BRANCH}"
-sudo mkdir chromiumos-sdk
-sudo chown ${USERNAME} chromiumos-sdk
+[ -d depot_tools ] || sudo mkdir chromiumos-sdk && \
+	sudo chown ${USERNAME} chromiumos-sdk
 cd chromiumos-sdk
 git config --global user.email "bot@kernelci.org"
 git config --global user.name "KernelCI Bot"
@@ -95,7 +95,7 @@ esac
 sed -i 's/selinux/-selinux/g' src/third_party/chromiumos-overlay/profiles/features/selinux/package.use
 
 # Temporary workaround as chrome-icu build fails at 10/08/2022 due corrupt git cache
-cros_sdk sync_chrome --tag=106.0.5249.134 --reset --gclient=/mnt/host/depot_tools/gclient /var/cache/chromeos-cache/distfiles/chrome-src --skip_cache
+# cros_sdk sync_chrome --tag=106.0.5249.134 --reset --gclient=/mnt/host/depot_tools/gclient /var/cache/chromeos-cache/distfiles/chrome-src --skip_cache
 
 # Add serial support
 echo "Add serial ${SERIAL} support"
@@ -144,4 +144,4 @@ echo "Creating manifest file"
 python3 "${SCRIPTPATH}/create_manifest.py" "${BOARD}" "${DATA_DIR}/${BOARD}"
 
 # Probably redundant, but better safe than sorry
-cleanup
+# cleanup
