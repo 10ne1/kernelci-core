@@ -41,8 +41,8 @@ git config --global color.ui false
 # exit
 
 # Fetching current manifest snapshot
-repo init -u https://github.com/kernelci/kernelci-core -b chromeos.kernelci.org -m "config/rootfs/chromiumos/cros-snapshot-$2.xml"
-repo sync -j$(nproc)
+repo init -u https://github.com/10ne1/kernelci-core.git -b dev/aratiu/chromeos-dev -m "config/rootfs/chromiumos/cros-snapshot-$2.xml"
+repo sync --force-sync -j$(nproc)
 echo Building SDK
 cros_sdk --create
 
