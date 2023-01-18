@@ -47,8 +47,6 @@ echo Building SDK
 cros_sdk --create
 
 echo "Board ${BOARD} setup"
-# Compiling ChromiumOS image
-# Future possible option --profile=x, for example kernel-5_15, profiles are at /mnt/host/source/src/overlays/overlay-${BOARD}/profiles/
 cros_sdk setup_board --skip-chroot-upgrade --board=${BOARD}
 
 echo "Patching ${BOARD} specific issues"
