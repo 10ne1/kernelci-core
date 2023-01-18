@@ -49,7 +49,7 @@ cros_sdk --create
 echo "Board ${BOARD} setup"
 # Compiling ChromiumOS image
 # Future possible option --profile=x, for example kernel-5_15, profiles are at /mnt/host/source/src/overlays/overlay-${BOARD}/profiles/
-cros_sdk setup_board --board=${BOARD}
+cros_sdk setup_board --skip-chroot-upgrade --board=${BOARD}
 
 echo "Patching ${BOARD} specific issues"
 case ${BOARD} in
@@ -95,7 +95,7 @@ esac
 
 # Add serial support
 echo "Add serial ${SERIAL} support"
-cros_sdk USE=pcserial build_packages --board=${BOARD}
+cros_sdk USE=pcserial build_packages --skip-chroot-upgrade --board=${BOARD}
 cros_sdk USE="tty_console_${SERIAL}" emerge-"${BOARD}" chromeos-base/tty
 echo "Building image (${SERIAL})"
 cros_sdk ./build_image --enable_serial ${SERIAL} --board="${BOARD}" --boot_args "earlyprintk=serial,keep console=tty0" --noenable_rootfs_verification test
