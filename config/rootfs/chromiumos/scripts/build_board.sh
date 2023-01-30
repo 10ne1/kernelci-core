@@ -92,7 +92,8 @@ esac
 # cros_sdk sync_chrome --tag=106.0.5249.134 --reset --gclient=/mnt/host/depot_tools/gclient /var/cache/chromeos-cache/distfiles/chrome-src --skip_cache
 
 echo "Building packages (${SERIAL})"
-cros_sdk USE="tty_console_${SERIAL} pcserial" build_packages --skip-chroot-upgrade --board=${BOARD}
+cros_sdk USE="tty_console_${SERIAL} pcserial cr50_skip_update" \
+	 build_packages --skip-chroot-upgrade --board=${BOARD}
 
 echo "Building image (${SERIAL})"
 cros_sdk ./build_image --enable_serial ${SERIAL} --board="${BOARD}" --boot_args "earlyprintk=serial,keep console=tty0" --noenable_rootfs_verification test
