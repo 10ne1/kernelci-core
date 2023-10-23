@@ -91,6 +91,9 @@ else
     KCICORE_URL="$(echo ${KCICORE_URL} | sed -e 's%:%/%g' -e 's%^git@%https://%')"
   fi
 
+  KCICORE_URL="https://github.com/10ne1/kernelci-core.git"
+  KCICORE_BRANCH="aratiu-dev"
+
   echo "Fetching KernelCI manifest snapshot $2"
   repo init -u "${KCICORE_URL}" -b "${KCICORE_BRANCH}" -m "config/rootfs/chromiumos/cros-snapshot-$2.xml"
 fi
